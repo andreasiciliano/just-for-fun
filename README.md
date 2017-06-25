@@ -1,2 +1,2 @@
 # just-for-fun
-Solving little problems just for fun
+Solving small problems for fun
