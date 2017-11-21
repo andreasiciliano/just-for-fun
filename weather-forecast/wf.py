@@ -21,7 +21,8 @@ DailySummary = namedtuple("DailySummary", features)
 def extract_weather_data(url, api_key, target_date, state, city, days):  
     records = []
     for _ in range(days):
-        request = BASE_URL.format(API_KEY, state, city, target_date.strftime('%Y%m%d'))
+        request = BASE_URL.format(api_key, target_date.strftime('%Y%m%d'), 
+            state, city)
         response = requests.get(request)
         if response.status_code == 200:
             data = response.json()['history']['dailysummary'][0]
@@ -45,6 +46,6 @@ def extract_weather_data(url, api_key, target_date, state, city, days):
         target_date += timedelta(days=1)
     return records
 
-records = extract_weather_data(BASE_URL, API_KEY, STATE, CITY, target_date, 3)
+records = extract_weather_data(BASE_URL, API_KEY, target_date, STATE, CITY, 3)
 df = pd.DataFrame(records, columns=features).set_index('date')
 df.to_csv('records.csv')
