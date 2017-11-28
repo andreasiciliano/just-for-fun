@@ -69,7 +69,7 @@ tmp_df = pd.DataFrame(records, columns=features)
 
 # Append new records to existing records (to an empty DataFrame if this is the
 # first retrieval
-df = df.append(tmp_df)
+df = df.append(tmp_df, ignore_index=True)
 
 # Save records to csv file
 df.to_csv(filename)
